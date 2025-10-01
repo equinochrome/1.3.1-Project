@@ -2,9 +2,9 @@ import turtle
 import math
 import random
 import pygame
-# ======================
+ 
 # Setup Screen
-# ======================
+ 
 wn = turtle.Screen()
 wn.setup(600, 800)
 wn.bgcolor("black")
@@ -17,22 +17,22 @@ pygame.mixer.music.load("NON.mp3")  # Your music file
 pygame.mixer.music.set_volume(0.5)  # Optional: volume 0.0 - 1.0
 pygame.mixer.music.play(-1)  # -1 means loop indefinitely
 
-# ======================
+
 # Difficulty Selection
-# ======================
+
 difficulty = wn.textinput("Select Difficulty", "Choose difficulty: easy / medium / hard").lower()
 if difficulty not in ["easy", "medium", "hard"]:
     difficulty = "easy"
 
-# ======================
+
 # Load Sprites
-# ======================
+ 
 for direction in ["up", "down", "left", "right", "boss"]:
     wn.addshape(f"{direction}.gif")
 
-# ======================
+ 
 # Player Setup
-# ======================
+ 
 player = turtle.Turtle()
 player.shape("down.gif")
 player.penup()
@@ -42,9 +42,9 @@ SPEED = 5
 player_max_health = 100
 player_current_health = 100
 
-# ======================
+ 
 # Boss Setup
-# ======================
+ 
 boss = turtle.Turtle()
 boss.shape("boss.gif")
 boss.penup()
@@ -56,9 +56,9 @@ boss_current_health = 100
 boss_speed_x = 4
 boss_direction_x = 1
 
-# ======================
+ 
 # Health Bars
-# ======================
+ 
 health_bar_boss = turtle.Turtle()
 health_bar_boss.hideturtle()
 health_bar_boss.penup()
@@ -90,9 +90,9 @@ def draw_health_bar():
 
 draw_health_bar()
 
-# ======================
+ 
 # Movement State
-# ======================
+ 
 keys_pressed = {"Up": False, "Down": False, "Left": False, "Right": False}
 
 def key_press(key):
@@ -112,9 +112,9 @@ def update_player_shape():
     elif keys_pressed["Right"]:
         player.shape("right.gif")
 
-# ======================
+ 
 # Bullets
-# ======================
+ 
 boss_bullets = []
 player_bullets = []
 
@@ -175,9 +175,9 @@ def shoot_player():
     bullet = create_bullet(player.xcor(), player.ycor() + 20, 0, 7, "cyan")
     player_bullets.append(bullet)
 
-# ======================
+ 
 # End Game / Victory
-# ======================
+ 
 def game_over():
     msg = turtle.Turtle()
     msg.hideturtle()
@@ -196,9 +196,9 @@ def victory():
     msg.write("VICTORY!", align="center", font=("Arial", 36, "bold"))
     wn.update()
 
-# ======================
+ 
 # Movement Loop
-# ======================
+ 
 def move():
     global boss_direction_x, player_current_health, boss_current_health
 
@@ -255,9 +255,9 @@ def move():
     wn.update()
     wn.ontimer(move, 20)
 
-# ======================
+ 
 # Key Bindings
-# ======================
+ 
 wn.listen()
 for key in ["Up", "Down", "Left", "Right"]:
     wn.onkeypress(lambda k=key: key_press(k), key)
@@ -265,9 +265,9 @@ for key in ["Up", "Down", "Left", "Right"]:
 
 wn.onkeypress(shoot_player, "e")
 
-# ======================
+ 
 # Start Game
-# ======================
+ 
 shoot_boss_pattern()
 move()
 wn.mainloop()
